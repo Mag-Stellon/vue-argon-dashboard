@@ -20,11 +20,13 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
+import store from './vuex/store'
 
 Vue.config.productionTip = false
 
 Vue.use(ArgonDashboard)
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  store
 }).$mount('#app')

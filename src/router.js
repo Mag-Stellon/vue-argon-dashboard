@@ -9,21 +9,21 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'dashboard',
+      redirect: 'leaderboard',
       component: DashboardLayout,
       children: [
         {
-          path: '/dashboard',
-          name: 'dashboard',
+          path: '/leaderboard',
+          name: 'leaderboard',
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/LeaderBoard.vue')
         },
         {
-          path: '/icons',
-          name: 'icons',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')
+          path: '/flappy',
+          name: 'flappy',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Flappy.vue')
         },
         {
           path: '/profile',
@@ -31,14 +31,19 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue')
         },
         {
-          path: '/maps',
-          name: 'maps',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Maps.vue')
+          path: '/sudoku',
+          name: 'sudoku',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Sudoku.vue')
         },
         {
-          path: '/tables',
-          name: 'tables',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
+          path: '/slider',
+          name: 'slider',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Slider.vue')
+        },
+        {
+          path: '/memory',
+          name: 'memory',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Memory.vue')
         }
       ]
     },

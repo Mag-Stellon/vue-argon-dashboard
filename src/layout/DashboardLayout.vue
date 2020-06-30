@@ -2,9 +2,10 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <side-bar
       :background-color="sidebarBackground"
-      short-title="Argon"
-      title="Argon"
+      short-title="Statly"
+      title="Statly"
     >
+      <!--
       <template slot="links">
         <sidebar-item
           :link="{
@@ -22,6 +23,27 @@
         <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08 text-pink', path: '/register'}"/>
 
       </template>
+      -->
+
+      <template slot="free">
+        <sidebar-item :link="{name: 'Slider', icon: 'fa fa-puzzle-piece text-orange', path: '/slider'}"/>
+        <sidebar-item :link="{name: 'Memory', icon: 'fa fa-memory text-blue', path: '/memory'}"/>
+      </template>
+
+      <template slot="starter">
+        <sidebar-item :link="{name: 'Sudoku', icon: 'fa fa-infinity text-green', path: '/sudoku'}"/>
+      </template>
+
+      <template slot="premium">
+        <sidebar-item :link="{name: 'Sudoku', icon: 'fa fa-infinity text-green', path: '/sudoku'}"/>
+      </template>
+
+      <template slot="ultimate">
+        <sidebar-item :link="{name: 'Sudoku', icon: 'fa fa-infinity text-green', path: '/sudoku'}"/>
+        <sidebar-item :link="{name: 'Flappy', icon: 'fa fa-feather text-red', path: '/flappy'}"/>
+      </template>
+
+
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
@@ -31,20 +53,20 @@
           <!-- your content here -->
           <router-view></router-view>
         </fade-transition>
-        <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+        <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->
       </div>
     </div>
   </div>
 </template>
 <script>
   import DashboardNavbar from './DashboardNavbar.vue';
-  import ContentFooter from './ContentFooter.vue';
+  // import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
 
   export default {
     components: {
       DashboardNavbar,
-      ContentFooter,
+      // ContentFooter,
       FadeTransition
     },
     data() {
