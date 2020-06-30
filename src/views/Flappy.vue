@@ -133,7 +133,7 @@ export default {
   },
   computed: {
     currentPerformance() {
-      return 100 - parseInt(this.currentTime * 100 / this.bestTime());
+      return parseInt(this.currentTime * 100 / this.bestTime()) - 100;
     },
     currentBestTime() {
       return Math.max(this.bestTime(), this.currentTime).toFixed(2);
