@@ -23,16 +23,18 @@ import store from '@/vuex/store'
 export default {
   beforeRouteEnter (to, from, next) {
     store.dispatch("fetchGames", {
+      api: process.env.VUE_APP_API,
       category: to.params.category,
       success: next
     });
   },
   beforeRouteUpdate (to, from, next) {
     store.dispatch("fetchGames", {
+      api: process.env.VUE_APP_API,
       category: to.params.category,
       success: next
     });
-  }, 
+  },
   computed: {
     category() {
       return this.$route.params.category;

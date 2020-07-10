@@ -119,11 +119,13 @@ import store from '@/vuex/store'
 export default {
   beforeRouteEnter (to, from, next) {
     store.dispatch("fetchCheckouts", {
+      api: process.env.VUE_APP_API,
       success: next
     });
   },
   beforeRouteUpdate (to, from, next) {
     store.dispatch("fetchCheckouts", {
+      api: process.env.VUE_APP_API,
       success: next
     });
   }, 

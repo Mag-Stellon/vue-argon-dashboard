@@ -2,8 +2,8 @@
 import Axios from 'axios';
 
 export default {
-  fetchEquity(context, { success }) {
-    Axios.get(`http://localhost:3000/api/credit/equity`,  { baseURL: 'http://localhost:8080/' })
+  fetchEquity(context, { api, success }) {
+    Axios.get(`${api}/api/credit/equity`)
       .then(function (response) {
         context.commit('equity', {
           equity: response.data.equity
@@ -11,8 +11,8 @@ export default {
         success && success();
       })
   },
-  fetchGames(context, { category, success }) {
-    Axios.get(`http://localhost:3000/api/games/${category}`,  { baseURL: 'http://localhost:8080/' })
+  fetchGames(context, { api, category, success }) {
+    Axios.get(`${api}/api/games/${category}`)
       .then(function (response) {
         context.commit('games', {
           category,
@@ -21,8 +21,8 @@ export default {
         success && success();
       })
   },
-  fetchCheckouts(context, { success }) {
-    Axios.get(`http://localhost:3000/api/checkout/games/`,  { baseURL: 'http://localhost:8080/' })
+  fetchCheckouts(context, { api, success }) {
+    Axios.get(`${api}/api/checkout/games/`)
       .then(function (response) {
         context.commit('checkouts', {
           checkouts: response.data

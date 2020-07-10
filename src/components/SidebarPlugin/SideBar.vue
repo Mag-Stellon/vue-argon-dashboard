@@ -7,8 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </navbar-toggle-button>
     <router-link class="navbar-brand" to="/">
-      <!--<img :src="logo" class="navbar-brand-img" alt="...">-->
-      Statly
+      <img src="/img/brand/blue.svg" class="navbar-brand-img">
     </router-link>
 
     <slot name="mobile-right">
@@ -72,8 +71,7 @@
         <div class="row">
           <div class="col-6 collapse-brand">
             <router-link to="/">
-              <!--<img :src="logo">-->
-              Statly
+              <img src="/img/brand/blue.svg">
             </router-link>
           </div>
           <div class="col-6 collapse-close">
@@ -90,6 +88,7 @@
       <!--Heading-->
       <!--<h6 class="navbar-heading text-muted">Games</h6>-->
       <!--Navigation-->
+      <!-- <hr class="my-3"> -->
       <ul class="navbar-nav mb-md-3">
         <slot name="games">
         </slot>

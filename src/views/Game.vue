@@ -95,7 +95,7 @@
                 </div>
               </th>
               <td class="text-center first">
-                <button type="button" class="btn btn-default" @click="payCheckout(unlockGamePrice, `http://localhost:3000/api/checkout/confirm/${category}/${game.id}/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €10</button>
+                <button type="button" class="btn btn-default" @click="payCheckout(unlockGamePrice, `${process.env.VUE_APP_API}/api/checkout/confirm/${category}/${game.id}/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €10</button>
               </td>
             </tr>
             <tr>
@@ -110,7 +110,7 @@
                 </div>
               </th>
               <td class="text-center">
-                <button type="button" class="btn btn-default" @click="payCheckout(tenPackGamePrice, `http://localhost:3000/api/checkout/confirm/10/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €90</button>
+                <button type="button" class="btn btn-default" @click="payCheckout(tenPackGamePrice, `${process.env.VUE_APP_API}/api/checkout/confirm/10/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €90</button>
               </td>
             </tr>
           </tbody>
@@ -135,9 +135,11 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("fetchGames", {
+      api: process.env.VUE_APP_API,
       category: to.params.category,
       success: () => {
         store.dispatch("fetchEquity", {
+          api: process.env.VUE_APP_API,
           success: next
         });
       }
@@ -145,9 +147,11 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     store.dispatch("fetchGames", {
+      api: process.env.VUE_APP_API,
       category: to.params.category,
       success: () => {
         store.dispatch("fetchEquity", {
+          api: process.env.VUE_APP_API,
           success: next
         });
       }
@@ -156,19 +160,16 @@ export default {
   data() {
     return {
       force: false,
-      publishableKey:
-        process.env.STRIPE_PUBLISHABLE_KEY ||
-        "pk_test_51H1UitGRkgrXxqRE5mEVFryu32Tq0NzAgEyBoUMsbS522Q7556aNTpBRY7a52I2NyErEYrDg3StCp0jXCJO0YbBh00whw02ZUF",
       modal: false,
       isStart: false,
-      unlockGamePrice: "price_1H1UmKGRkgrXxqRE53fRRWPM",
-      tenPackGamePrice: "price_1H2yJLGRkgrXxqREtV0TECu9"
+      stripePublicKey: process.env.VUE_APP_STRIPE_PUBLIC_KEY,
+      unlockGamePrice: process.env.VUE_APP_UNLOCK_GAME_PRICE,
+      tenPackGamePrice: process.env.VUE_APP_TEN_PACK_GAME_PRICE
     };
   },
   methods: {
     start() {
       this.isStart = true;
-      this.$store.commit("play", this.game);
     },
     payCheckout(price, successUrl) {
       this.stripe.redirectToCheckout({
@@ -186,11 +187,11 @@ export default {
     checkout() {
       axios
         .post(
-          `http://localhost:3000/api/checkout/${this.category}/${this.game.id}`,
-          { baseURL: "http://localhost:8080/" }
+          `${process.env.VUE_APP_API}/api/checkout/${this.category}/${this.game.id}`
         )
         .then(() => {
           store.dispatch("fetchGames", {
+            api: process.env.VUE_APP_API,
             category: this.category,
             success: () => {
               this.modal = false;
@@ -217,7 +218,7 @@ export default {
       return this.$store.getters.equity;
     },
     stripe() {
-      return Stripe(this.publishableKey);
+      return Stripe(this.stripePublicKey);
     }
   }
 };

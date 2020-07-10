@@ -8,7 +8,6 @@ import getters from '../getters'
 import mutations from '../mutations'
 import actions from '../actions'
 
-
 // have vuex involved
 Vue.use(Vuex)
 
