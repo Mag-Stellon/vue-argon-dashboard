@@ -1,70 +1,24 @@
 <template>
 <base-nav class="navbar-top navbar-dark" id="navbar-main" :show-toggle-button="false" expand>
-
-  <!--
-  <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-    <div class="form-group mb-0">
-      <base-input placeholder="Search" class="input-group-alternative" alternative="" addon-right-icon="fas fa-search">
-      </base-input>
+  <router-link v-if="!isProfile" to="/profile" class="navbar-nav align-items-center d-none d-md-flex avatar">
+    <div class="icon text-white rounded-circle shadow">
+      <avatar />
     </div>
-  </form>
-  -->
-
-  <ul class="navbar-nav align-items-center d-none d-md-flex">
-    <li class="nav-item dropdown">
-      <base-dropdown class="nav-link pr-0">
-        <div class="media align-items-center" slot="title">
-          <span class="avatar avatar-sm rounded-circle">
-            <div class="icon icon-shape text-white rounded-circle shadow">
-              <i class="ni ni-money-coins"></i>
-            </div>
-            <!-- <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg"> -->
-          </span>
-
-          <div class="media-body ml-2 d-none d-lg-block">
-            <span class="mb-0 text-sm font-weight-bold">Stoin</span>
-          </div>
-        </div>
-
-        <template>
-          <div class=" dropdown-header noti-title">
-            <h6 class="text-overflow m-0">Welcome!</h6>
-          </div>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-single-02"></i>
-            <span>My profile</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-settings-gear-65"></i>
-            <span>Settings</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-calendar-grid-58"></i>
-            <span>Activity</span>
-          </router-link>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-support-16"></i>
-            <span>Support</span>
-          </router-link>
-          <div class="dropdown-divider"></div>
-          <router-link to="/profile" class="dropdown-item">
-            <i class="ni ni-user-run"></i>
-            <span>Logout</span>
-          </router-link>
-        </template>
-      </base-dropdown>
-    </li>
-  </ul>
+  </router-link>
 </base-nav>
 </template>
 
 <script>
+import Avatar from '@/components/Avatar'
+
 export default {
+  components: {
+    Avatar
+  },
   data() {
     return {
       activeNotifications: false,
       showMenu: false,
-      searchQuery: ''
     };
   },
   methods: {
@@ -76,6 +30,11 @@ export default {
     },
     toggleMenu() {
       this.showMenu = !this.showMenu;
+    }
+  },
+  computed: {
+    isProfile(){
+      return this.$route.name == "profile";
     }
   }
 };
@@ -95,7 +54,15 @@ export default {
   cursor: pointer;
 }
 
-.media .avatar .icon {
-  color: #FFC107 !important;
+.avatar .icon {
+  padding: 0;
+}
+
+.avatar, .btn-default {
+  background-color: #3a383f;
+}
+
+.btn-default:hover {
+  background-color: #21242b;
 }
 </style>

@@ -21,10 +21,17 @@ import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
 import store from './vuex/store'
+import BootstrapVue from 'bootstrap-vue'
+
+import axios from 'axios'
+axios.defaults.withCredentials = true;
+axios.defaults.crossDomain = true;
 
 Vue.config.productionTip = false
 
 Vue.use(ArgonDashboard)
+Vue.use(BootstrapVue)
+
 new Vue({
   router,
   render: h => h(App),

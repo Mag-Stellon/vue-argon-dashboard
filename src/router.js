@@ -1,66 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
-import AuthLayout from '@/layout/AuthLayout'
+
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',
-      redirect: 'leaderboard',
+      redirect: '/games/casual',
       component: DashboardLayout,
       children: [
         {
-          path: '/leaderboard',
-          name: 'leaderboard',
-          // route level code-splitting
-          // this generates a separate chunk (about.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/LeaderBoard.vue')
+          path: '/games/:category',
+          name: 'games',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Games.vue')
         },
         {
-          path: '/flappy',
-          name: 'flappy',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Flappy.vue')
+          path: '/game/:category/:id',
+          name: 'game',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Game.vue')
         },
         {
           path: '/profile',
           name: 'profile',
-          component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue')
-        },
-        {
-          path: '/sudoku',
-          name: 'sudoku',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Sudoku.vue')
-        },
-        {
-          path: '/slider',
-          name: 'slider',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Slider.vue')
-        },
-        {
-          path: '/memory',
-          name: 'memory',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Memory.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue'),
         }
-      ]
-    },
-    {
-      path: '/',
-      redirect: 'login',
-      component: AuthLayout,
-      children: [
+        ,
         {
-          path: '/login',
-          name: 'login',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
-        },
-        {
-          path: '/register',
-          name: 'register',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Register.vue')
+          path: '*',
+          redirect: '/games/casual',
         }
       ]
     }

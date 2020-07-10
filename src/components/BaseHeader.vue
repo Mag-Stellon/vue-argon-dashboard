@@ -20,4 +20,7 @@
   }
 </script>
 <style>
+.header {
+  background-image: linear-gradient(to left bottom, #21242b, #3a383f, #544c53, #6f6366, #887b7a, #968986, #a39893, #b0a7a0, #b6aea8, #bcb5af, #c3bdb7, #c9c4bf) !important;
+}
 </style>

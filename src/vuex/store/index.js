@@ -1,25 +1,51 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
 
 import getters from '../getters'
-import actions from '../actions'
 import mutations from '../mutations'
+import actions from '../actions'
+
 
 // have vuex involved
 Vue.use(Vuex)
 
 const state = {
-  leftMatched: 0,
-  highestSpeed: 0,
-  status: '',
-  cards: [],
-  elapsedMs: 0
+  checkouts: [],
+  equity: 0,
+  avatar: {
+    accessoriesType: 'Round',
+    clotheType: 'GraphicShirt',
+    clotheColor: 'Black',
+    eyebrowType: 'DefaultNatural',
+    eyeType: 'WinkWacky',
+    facialHairColor: 'Black',
+    facialHairType: 'BeardLight',
+    graphicType: 'Bat',
+    hairColor: 'Brown',
+    mouthType: 'Smile',
+    skinColor: 'DarkBrown',
+    topType: 'WinterHat3',
+  }
 }
 
 export default new Vuex.Store({
   state,
-  actions,
   mutations,
   getters,
-  strict: process.env.NODE_ENV !== 'production'
+  actions,
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [
+    createPersistedState({
+      key: 'iezvihopntawgkz4rhrxu',
+      paths: ['avatar'],
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      }
+    })
+  ]
 })
