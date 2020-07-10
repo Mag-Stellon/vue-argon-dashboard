@@ -95,7 +95,7 @@
                 </div>
               </th>
               <td class="text-center first">
-                <button type="button" class="btn btn-default" @click="payCheckout(unlockGamePrice, `${process.env.VUE_APP_API}/api/checkout/confirm/${category}/${game.id}/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €10</button>
+                <button type="button" class="btn btn-default" @click="payCheckout(unlockGamePrice, `${api}/api/checkout/confirm/${category}/${game.id}/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €10</button>
               </td>
             </tr>
             <tr>
@@ -110,7 +110,7 @@
                 </div>
               </th>
               <td class="text-center">
-                <button type="button" class="btn btn-default" @click="payCheckout(tenPackGamePrice, `${process.env.VUE_APP_API}/api/checkout/confirm/10/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €90</button>
+                <button type="button" class="btn btn-default" @click="payCheckout(tenPackGamePrice, `${api}/api/checkout/confirm/10/{CHECKOUT_SESSION_ID}`)"><i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i> Buy for €90</button>
               </td>
             </tr>
           </tbody>
@@ -162,6 +162,7 @@ export default {
       force: false,
       modal: false,
       isStart: false,
+      api: process.env.VUE_APP_API,
       stripePublicKey: process.env.VUE_APP_STRIPE_PUBLIC_KEY,
       unlockGamePrice: process.env.VUE_APP_UNLOCK_GAME_PRICE,
       tenPackGamePrice: process.env.VUE_APP_TEN_PACK_GAME_PRICE
